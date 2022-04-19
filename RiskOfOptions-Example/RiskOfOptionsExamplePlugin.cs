@@ -1,6 +1,5 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using R2API.Utils;
 using RiskOfOptions;
 using RiskOfOptions.OptionConfigs;
 using RiskOfOptions.Options;
@@ -9,7 +8,6 @@ using UnityEngine;
 namespace RiskOfOptions_Example
 {
     [BepInPlugin(Guid, ModName, Version)]
-    [NetworkCompatibility(CompatibilityLevel.NoNeedForSync, VersionStrictness.DifferentModVersionsAreOk)]
     public sealed class RiskOfOptionsExamplePlugin : BaseUnityPlugin
     {
         private const string
@@ -58,6 +56,16 @@ namespace RiskOfOptions_Example
                     min = 1f,
                     max = 6f,
                     increment = 0.25f
+                }));
+            
+            ModSettingsManager.AddOption(new IntSliderOption(Config.Bind("General",
+                "Int Slider",
+                3,
+                "Slider limited to whole numbers with a range of 1 - 10"),
+                new IntSliderConfig
+                {
+                    min = 1,
+                    max = 10
                 }));
 
             var key = Config.Bind("General",
@@ -113,6 +121,17 @@ namespace RiskOfOptions_Example
                     min = 1f,
                     max = 6f,
                     increment = 0.25f,
+                    checkIfDisabled = Disabled
+                }));
+            
+            ModSettingsManager.AddOption(new IntSliderOption(Config.Bind("Disable",
+                    "Int Slider",
+                    3,
+                    ""),
+                new IntSliderConfig
+                {
+                    min = 1,
+                    max = 10,
                     checkIfDisabled = Disabled
                 }));
             
