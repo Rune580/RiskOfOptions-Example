@@ -89,6 +89,11 @@ namespace RiskOfOptions_Example
             ConfigEntry<MyEnum> testEnum = Config.Bind("General", "Choice", MyEnum.Two, "Choice Description");
 
             ModSettingsManager.AddOption(new ChoiceOption(testEnum));
+            
+            ModSettingsManager.AddOption(new ColorOption(Config.Bind("General",
+                "Color Picker",
+                Color.green,
+                "A color option that opens a color picker to modify.")));
         }
 
         private void DisableShowcase()
@@ -152,6 +157,12 @@ namespace RiskOfOptions_Example
                 MyEnum.Two,
                 ""),
                 new ChoiceConfig { checkIfDisabled = Disabled }));
+            
+            ModSettingsManager.AddOption(new ColorOption(Config.Bind("Disable",
+                "Color Picker",
+                Color.green,
+                "A color option that opens a color picker to modify."),
+                new ColorOptionConfig { checkIfDisabled = Disabled }));
         }
 
         private bool Disabled()
